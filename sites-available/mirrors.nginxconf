@@ -1,0 +1,30 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name mirrors.thehack.org.cn;
+
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name mirrors.thehack.org.cn;
+
+    # ssl settings and certificates
+    include ssl/ssl.nginxconf;
+
+    location / {
+        return 302 https://$host/manjaro;
+    }
+
+    location /raspbian {
+        autoindex on;
+        root /mnt/Raspbian;
+    }
+
+    location /manjaro {
+        autoindex on;
+        root /mnt/Manjaro;
+    }
+}
