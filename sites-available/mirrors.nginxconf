@@ -15,16 +15,16 @@ server {
     include ssl/ssl.nginxconf;
 
     location / {
-        return 302 https://$host/manjaro;
+        root /mnt/mirrors;
     }
 
     location /raspbian {
         autoindex on;
-        root /mnt/Raspbian;
+        alias /mnt/Raspbian;
     }
 
     location /manjaro {
         autoindex on;
-        root /mnt/Manjaro;
+        alias /mnt/Manjaro;
     }
 }
